@@ -1,0 +1,1579 @@
+@use 'utilities/colors' as colors;
+@use 'utilities/keyframes' as keyframes;
+@use 'utilities/animista' as animista;
+
+*,
+*::after,
+*::before {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	font-size: 62.5%;
+	scroll-behavior: smooth;
+}
+
+body {
+	font-family: 'Montserrat', sans-serif;
+	// background-color: colors.$mainColor;
+	width: 100%;
+	height: 100%;
+	font-size: 1.6rem;
+}
+
+.wrapper {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+.card-nav {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 6em;
+	z-index: 100;
+	background-color: colors.$navColor;
+	scroll-behavior: smooth;
+	transition: color 1s;
+
+	&__logo {
+		position: absolute;
+		top: 0.2em;
+		left: -5em;
+	}
+
+	&__large {
+		display: none;
+	}
+
+	&__burger-btn {
+		position: absolute;
+		top: 1em;
+		right: 0;
+		background-color: transparent;
+		border: none;
+		padding: 1.6em 2.2em;
+		outline: none;
+		cursor: pointer;
+
+		&--bars {
+			font-size: 3.5rem;
+			color: colors.$textColor;
+			animation: scaleBars 1s ease-in-out;
+			transition: transform 1s;
+		}
+		&--x {
+			display: none;
+			font-size: 3.5rem;
+			color: colors.$textColor;
+			animation: rotateX 0.5s ease-in-out;
+		}
+	}
+
+	&__nav {
+		position: absolute;
+		top: 6em;
+		display: flex;
+		justify-content: start;
+		align-items: center;
+		flex-direction: column;
+		width: 100%;
+		height: 100vh;
+		background-color: colors.$navColor;
+		transform: translateX(100%);
+		transition: transform 0.5s 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
+		border-top: 3px solid colors.$textColor;
+		cursor: default;
+
+		&--item {
+			margin-top: 1.2em;
+			font-size: 4rem;
+			color: colors.$textColor;
+			color: colors.$textColor;
+			text-decoration: none;
+			cursor: pointer;
+			transition: color 0.5s, background-color 0.5s, border-radius 0.5s;
+
+			&:hover {
+				color: colors.$mainColor;
+				background-color: colors.$secondColor;
+				border-radius: 10px;
+			}
+		}
+	}
+}
+
+.card-home {
+	position: relative;
+	width: 100%;
+	height: 100vh;
+
+	&__img {
+		position: absolute;
+		top: 6em;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-image: url('../img/Roksana-small.jpg');
+		background-size: cover;
+		background-position: left;
+		background-attachment: fixed;
+		// z-index: 100;
+
+		&::before {
+			position: absolute;
+			top: 0;
+			left: 0;
+			content: '';
+			width: 100%;
+			height: 100%;
+			background-color: rgba(0, 0, 0, 0.3);
+		}
+	}
+	&__title {
+		position: absolute;
+		bottom: 1em;
+		left: 0;
+		font-size: 6rem;
+		color: colors.$mainColor;
+		text-shadow: 5px 5px 5px colors.$textColor;
+		text-align: center;
+		font-family: 'Tulpen One', cursive;
+		z-index: 10;
+	}
+}
+.card-aboutme {
+	position: relative;
+	width: 100%;
+	background: colors.$linearColor;
+
+	&__title {
+		position: absolute;
+		top: 4em;
+		left: 1.5em;
+		margin-top: 0.5em;
+		color: colors.$mainColor;
+		font-size: 2.8rem;
+
+		&::before {
+			position: absolute;
+			top: 0;
+			left: -0.6em;
+			content: '';
+			background-color: colors.$mainColor;
+			height: 110%;
+			width: 0.1em;
+		}
+		&::after {
+			position: absolute;
+			bottom: -0.2em;
+			left: -0.6em;
+			content: '';
+			background-color: colors.$mainColor;
+			height: 0.1em;
+			width: 2em;
+		}
+	}
+	&__undertitle {
+		padding: 10em 2em 0;
+		font-size: 2.1rem;
+		text-align: center;
+		color: colors.$mainColor;
+	}
+	&__paragraphs {
+		width: 100%;
+		padding: 2em 2em 2em;
+		color: colors.$mainColor;
+		color: colors.$textColor;
+		font-size: 1.7rem;
+
+		&--two {
+			padding-top: 1em;
+		}
+		&--third {
+			padding-top: 1em;
+		}
+	}
+}
+
+.card-services {
+	position: relative;
+	width: 100%;
+	background: colors.$linearColor;
+
+	&__title {
+		position: absolute;
+		top: 4em;
+		left: 1.5em;
+		margin-top: 0.5em;
+		color: colors.$mainColor;
+		font-size: 2.8rem;
+
+		&::before {
+			position: absolute;
+			top: 0;
+			left: -0.6em;
+			content: '';
+			background-color: colors.$mainColor;
+			height: 110%;
+			width: 0.1em;
+		}
+		&::after {
+			position: absolute;
+			bottom: -0.2em;
+			left: -0.6em;
+			content: '';
+			background-color: colors.$mainColor;
+			height: 0.1em;
+			width: 2em;
+		}
+	}
+
+	&__buttons {
+		padding: 14em 2em 2em;
+
+		&__box {
+			transition: color 0.3s;
+			padding-top: 1em;
+
+			&__button {
+				width: 100%;
+				background-color: colors.$mainColor;
+				border-radius: 10px;
+				cursor: pointer;
+
+				&--title {
+					padding: 1em;
+					font-size: 2.2rem;
+					color: colors.$textColor;
+				}
+			}
+			&__photo {
+				display: none;
+				padding: 0.3em;
+				width: 100%;
+				border-radius: 20px;
+			}
+		}
+	}
+}
+
+.card-price {
+	position: relative;
+	width: 100%;
+	background: colors.$linearColor;
+
+	&__title {
+		position: absolute;
+		top: 4em;
+		left: 1.5em;
+		margin-top: 0.5em;
+		color: colors.$mainColor;
+		font-size: 2.8rem;
+
+		&::before {
+			position: absolute;
+			top: 0;
+			left: -0.6em;
+			content: '';
+			background-color: colors.$mainColor;
+			height: 110%;
+			width: 0.1em;
+		}
+		&::after {
+			position: absolute;
+			bottom: -0.2em;
+			left: -0.6em;
+			content: '';
+			background-color: colors.$mainColor;
+			height: 0.1em;
+			width: 2em;
+		}
+	}
+	&__box {
+		width: 100%;
+		padding: 14em 2em 2em;
+
+		&--paragraph {
+			color: colors.$textColor;
+			font-size: 2rem;
+			padding-top: 0.5em;
+		}
+		&--span {
+			display: flex;
+			justify-content: end;
+			font-weight: bold;
+			border-bottom: 1px solid colors.$textColor;
+		}
+	}
+
+	&__attention {
+		padding: 1em 1em 2em;
+		text-align: center;
+
+		&--attention {
+			align-items: center;
+			font-style: italic;
+			color: colors.$textColor;
+			font-size: 1.5rem;
+		}
+		&--span {
+			font-weight: bold;
+			font-size: 1.8rem;
+		}
+	}
+}
+
+.promotion {
+	position: relative;
+	width: 100%;
+	height: 100vh;
+	background: colors.$linearColor;
+
+	&__title {
+		position: absolute;
+		top: 4em;
+		left: 1.5em;
+		margin-top: 0.5em;
+		color: colors.$mainColor;
+		font-size: 2.8rem;
+
+		&::before {
+			position: absolute;
+			top: 0;
+			left: -0.6em;
+			content: '';
+			background-color: colors.$mainColor;
+			height: 110%;
+			width: 0.1em;
+		}
+		&::after {
+			position: absolute;
+			bottom: -0.2em;
+			left: -0.6em;
+			content: '';
+			background-color: colors.$mainColor;
+			height: 0.1em;
+			width: 2em;
+		}
+	}
+}
+
+.card-contact {
+	position: relative;
+	width: 100%;
+	background: colors.$linearColor;
+
+	&__title {
+		position: absolute;
+		top: 4em;
+		left: 1.5em;
+		margin-top: 0.5em;
+		color: colors.$mainColor;
+		font-size: 2.8rem;
+
+		&::before {
+			position: absolute;
+			top: 0;
+			left: -0.6em;
+			content: '';
+			background-color: colors.$mainColor;
+			height: 110%;
+			width: 0.1em;
+		}
+		&::after {
+			position: absolute;
+			bottom: -0.2em;
+			left: -0.6em;
+			content: '';
+			background-color: colors.$mainColor;
+			height: 0.1em;
+			width: 2em;
+		}
+	}
+
+	&__box {
+		position: relative;
+		width: 100%;
+		padding: 13em 2em 2em;
+
+		&__one {
+			padding: 1em;
+			width: 100%;
+			font-size: 2.5rem;
+			color: colors.$textColor;
+			border-bottom: 1px solid colors.$textColor;
+
+			&--one {
+				position: absolute;
+				top: 0.5em;
+				left: 0;
+				padding-left: 0.5em;
+			}
+			&--two {
+				position: absolute;
+				top: 0.5em;
+				right: 0;
+				padding-right: 0.5em;
+				text-decoration: none;
+				color: colors.$textColor;
+			}
+		}
+
+		&__two {
+			margin-top: 1em;
+			padding: 1em;
+			width: 100%;
+			font-size: 2.5rem;
+			color: colors.$textColor;
+			border-bottom: 1px solid colors.$textColor;
+			padding-top: 1em;
+
+			&--one {
+				position: absolute;
+				top: 0.5em;
+				left: 0;
+				padding-left: 0.5em;
+			}
+			&--two {
+				position: absolute;
+				top: 1em;
+				right: 0;
+				padding-right: 0.4em;
+				font-size: 1.6rem;
+			}
+		}
+
+		&__three {
+			width: 100%;
+			margin-top: 2em;
+			padding-bottom: 2em;
+			text-align: center;
+			text-transform: uppercase;
+			font-weight: bold;
+			color: colors.$textColor;
+
+			&--findMe {
+				padding-bottom: 1.5em;
+				font-size: 2.4rem;
+			}
+			&--facebookIcon {
+				padding-right: 0.3em;
+				font-size: 5rem;
+				color: colors.$textColor;
+			}
+
+			&--instaIcon {
+				font-size: 5rem;
+				color: colors.$textColor;
+			}
+		}
+	}
+}
+
+.portfolio {
+	position: relative;
+	width: 100%;
+	background: colors.$linearColor;
+
+	&__title {
+		position: absolute;
+		top: 4em;
+		left: 1.5em;
+		margin-top: 0.5em;
+		color: colors.$mainColor;
+		font-size: 2.8rem;
+
+		&::before {
+			position: absolute;
+			top: 0;
+			left: -0.6em;
+			content: '';
+			background-color: colors.$mainColor;
+			height: 110%;
+			width: 0.1em;
+		}
+		&::after {
+			position: absolute;
+			bottom: -0.2em;
+			left: -0.6em;
+			content: '';
+			background-color: colors.$mainColor;
+			height: 0.1em;
+			width: 2em;
+		}
+	}
+	&__box {
+		padding: 15em 1em 2em;
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+
+		&__img {
+			padding: 1em 0;
+			width: 100%;
+
+			&--img {
+				width: 100%;
+				height: 33em;
+				padding: 0.5em;
+				border: 3px solid colors.$mainColor;
+				border-radius: 80px;
+			}
+		}
+	}
+}
+
+.footer {
+	background-color: colors.$navColor;
+	height: 2em;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	&__text {
+		color: colors.$textColor;
+		text-align: center;
+	}
+}
+
+@media (min-width: 350px) {
+	.card-home {
+		&__title {
+			position: absolute;
+			bottom: 1em;
+			left: 0.2em;
+			font-size: 6rem;
+		}
+	}
+}
+
+@media (min-width: 371px) {
+	.card-home {
+		&__title {
+			bottom: 1em;
+			left: 0.7em;
+			font-size: 6rem;
+		}
+	}
+}
+@media (min-width: 401px) {
+	.card-home {
+		&__title {
+			bottom: 1em;
+			left: 1.3em;
+			font-size: 6rem;
+		}
+	}
+	.portfolio {
+		&__box {
+			padding: 15em 1em 2em;
+			width: 100%;
+
+			&__img {
+				padding: 1em 1em;
+				width: 100%;
+
+				&--img {
+					height: 34em;
+				}
+			}
+		}
+	}
+}
+
+@media (min-width: 430px) {
+	.card-home {
+		&__title {
+			bottom: 1em;
+			left: 1.5em;
+			padding-right: 0.3em;
+			font-size: 6rem;
+		}
+	}
+}
+@media (min-width: 467px) {
+	.card-home {
+		&__title {
+			bottom: 0.5em;
+			left: 1.8em;
+			padding-right: 1em;
+			font-size: 6.5rem;
+		}
+	}
+	.portfolio {
+		&__box {
+			padding: 15em 1em 2em;
+			width: 100%;
+
+			&__img {
+				padding: 1em 1em;
+				width: 100%;
+
+				&--img {
+					height: 35em;
+				}
+			}
+		}
+	}
+}
+
+@media (min-width: 540px) {
+	.portfolio {
+		&__box {
+			padding: 15em 1em 2em;
+			width: 100%;
+
+			&__img {
+				padding: 1em 1em;
+				width: 100%;
+
+				&--img {
+					height: 39em;
+				}
+			}
+		}
+	}
+}
+@media (min-width: 571px) {
+	.card-home {
+		&__title {
+			left: 2.2em;
+			padding-right: 0.8em;
+			font-size: 6.6rem;
+		}
+	}
+}
+
+@media (min-width: 576px) {
+	.card-nav {
+		&__burger-btn {
+			top: 0.5em;
+			right: 1em;
+			&--bars {
+				font-size: 5rem;
+			}
+			&--x {
+				display: none;
+				font-size: 5rem;
+			}
+		}
+
+		&__nav {
+			&--item {
+				margin-top: 1.3em;
+				font-size: 4.2rem;
+			}
+		}
+	}
+	.card-aboutme {
+		&__title {
+			font-size: 3rem;
+		}
+		&__undertitle {
+			padding: 10em 2em 0;
+			font-size: 2.5rem;
+		}
+		&__paragraphs {
+			padding: 4em 2.2em 2em;
+			font-size: 1.8rem;
+		}
+	}
+
+	.card-services {
+		&__title {
+			font-size: 3rem;
+		}
+		&__buttons {
+			padding: 15em 3em 2em;
+
+			&__box {
+				padding-top: 1.3em;
+
+				&__button {
+					&--title {
+						padding: 1.1em;
+						font-size: 2.4rem;
+					}
+				}
+				&__photo {
+					padding: 0.4em 1em;
+					border-radius: 40px;
+				}
+			}
+		}
+	}
+	.card-price {
+		&__title {
+			font-size: 3rem;
+		}
+		&__box {
+			padding: 15em 2.5em 2em;
+
+			&--paragraph {
+				font-size: 2.3rem;
+				padding-top: 0.6em;
+			}
+		}
+
+		&__attention {
+			padding: 1em 2em 2em;
+
+			&--attention {
+				font-size: 1.6rem;
+			}
+			&--span {
+				font-size: 1.9rem;
+			}
+		}
+	}
+
+	.card-contact {
+		&__title {
+			font-size: 3rem;
+		}
+
+		&__box {
+			padding: 14em 2em 2em;
+
+			&__one {
+				font-size: 2.6rem;
+				&--one {
+					padding-left: 0.5em;
+				}
+				&--two {
+					padding-right: 0.5em;
+				}
+			}
+
+			&__two {
+				margin-top: 1em;
+				padding: 1em;
+
+				font-size: 2.6rem;
+				padding-top: 1em;
+
+				&--one {
+					padding-left: 0.5em;
+				}
+				&--two {
+					top: 0.5em;
+					padding-right: 0.5em;
+					font-size: 2.6rem;
+				}
+			}
+
+			&__three {
+				margin-top: 3em;
+				padding-bottom: 2em;
+
+				&--findMe {
+					padding-bottom: 2em;
+					font-size: 2.6rem;
+				}
+				&--facebookIcon {
+					padding-right: 0.4em;
+					font-size: 5.5rem;
+				}
+				&--instaIcon {
+					font-size: 5.5rem;
+				}
+			}
+		}
+	}
+
+	.specialOffers {
+		&__title {
+			font-size: 3rem;
+		}
+	}
+	.portfolio {
+		&__title {
+			font-size: 3rem;
+		}
+		&__box {
+			padding: 17em 0.5em 2em;
+			display: flex;
+			flex-direction: row;
+			flex-wrap: wrap;
+
+			&__img {
+				padding: 1em 0.5em;
+				width: 50%;
+
+				&--img {
+					width: 100%;
+					height: 25em;
+					padding: 0.5em;
+					border-radius: 80px;
+				}
+			}
+		}
+	}
+}
+@media (min-width: 593px) {
+	.card-home {
+		&__title {
+			left: 2.4em;
+			padding-right: 0.8em;
+			font-size: 6.6rem;
+		}
+	}
+}
+@media (min-width: 606px) {
+	.card-home {
+		&__title {
+			left: 2.7em;
+			padding-right: 0.8em;
+			font-size: 6.6rem;
+		}
+	}
+}
+@media (min-width: 626px) {
+	.card-home {
+		&__title {
+			bottom: 1em;
+			left: 2.9em;
+			padding-right: 1em;
+			font-size: 6.6rem;
+		}
+	}
+}
+@media (min-width: 651px) {
+	.card-home {
+		&__title {
+			bottom: 0.3em;
+			left: 4.2em;
+			padding-right: 1em;
+			font-size: 6.6rem;
+		}
+	}
+	.portfolio {
+		&__title {
+			font-size: 3.2rem;
+		}
+		&__box {
+			padding: 18em 0.5em 2em;
+
+			&__img {
+				padding: 1em 0.5em;
+				width: 50%;
+
+				&--img {
+					width: 100%;
+					height: 29em;
+				}
+			}
+		}
+	}
+}
+@media (min-width: 738px) {
+	.card-home {
+		&__title {
+			left: 4.7em;
+			padding-right: 1em;
+			font-size: 6.6rem;
+		}
+	}
+}
+
+@media (min-width: 768px) {
+	.card-nav {
+		&__logo {
+			left: -2em;
+		}
+
+		&__burger-btn {
+			top: 0.5em;
+			right: 1em;
+			&--bars {
+				font-size: 5rem;
+			}
+			&--x {
+				font-size: 4.5rem;
+			}
+		}
+
+		&__nav {
+			&--item {
+				margin-top: 1.2em;
+				font-size: 4.3rem;
+			}
+		}
+	}
+	.card-home {
+		&__img {
+			background-position: center;
+		}
+		.card-home {
+			&__title {
+				bottom: 0.5em;
+				left: 2em;
+				right: 0em;
+				font-size: 6.6rem;
+			}
+		}
+	}
+	.card-aboutme {
+		&__title {
+			left: 2em;
+			font-size: 3.2rem;
+		}
+		&__undertitle {
+			padding: 10em 2em 0;
+			font-size: 2.8rem;
+		}
+		&__paragraphs {
+			padding: 4em 2.5em 2em;
+			font-size: 1.9rem;
+		}
+	}
+	.card-services {
+		&__title {
+			left: 2em;
+			font-size: 3.2rem;
+		}
+		&__buttons {
+			padding: 16em 4.5em 2em;
+
+			&__box {
+				padding-top: 1.4em;
+
+				&__button {
+					&--title {
+						padding: 1.2em;
+						font-size: 2.5rem;
+					}
+				}
+				&__photo {
+					padding: 0.5em 2em;
+					border-radius: 80px;
+				}
+			}
+		}
+	}
+	.card-price {
+		&__title {
+			left: 2em;
+			font-size: 3.2rem;
+		}
+		&__box {
+			padding: 16em 3em 2em;
+
+			&--paragraph {
+				font-size: 2.4rem;
+				padding-top: 0.7em;
+			}
+		}
+
+		&__attention {
+			padding: 1em 3em 2em;
+
+			&--attention {
+				font-size: 1.7rem;
+			}
+			&--span {
+				font-size: 2rem;
+			}
+		}
+	}
+	.card-contact {
+		&__title {
+			left: 2em;
+			font-size: 3.2rem;
+		}
+
+		&__box {
+			padding: 15em 4em 2em;
+
+			&__one {
+				font-size: 2.7rem;
+				&--one {
+					padding-left: 0.5em;
+				}
+				&--two {
+					padding-right: 0.5em;
+				}
+			}
+
+			&__two {
+				margin-top: 1.5em;
+				padding: 1em;
+
+				font-size: 2.7rem;
+				padding-top: 1em;
+
+				&--one {
+					padding-left: 0.5em;
+				}
+				&--two {
+					top: 0.5em;
+					padding-right: 0.5em;
+				}
+			}
+
+			&__three {
+				margin-top: 4em;
+				padding-bottom: 3em;
+
+				&--findMe {
+					padding-bottom: 2em;
+					font-size: 2.7rem;
+				}
+				&--facebookIcon {
+					padding-right: 0.4em;
+					font-size: 5.8rem;
+				}
+				&--instaIcon {
+					font-size: 5.8rem;
+				}
+			}
+		}
+	}
+	.promotion {
+		&__title {
+			font-size: 3.2rem;
+		}
+	}
+	.portfolio {
+		&__title {
+			font-size: 3.2rem;
+		}
+		&__box {
+			padding: 18em 0.5em 2em;
+
+			&__img {
+				padding: 1em 0.5em;
+				width: 50%;
+
+				&--img {
+					width: 100%;
+					height: 31em;
+				}
+			}
+		}
+	}
+}
+@media (min-width: 800px) {
+	.card-home {
+		padding: 0 15em;
+
+		&__title {
+			font-size: 7.5rem;
+		}
+	}
+}
+@media (min-width: 830px) {
+	.portfolio {
+		&__title {
+			font-size: 3.2rem;
+		}
+		&__box {
+			padding: 18em 0.5em 2em;
+
+			&__img {
+				padding: 1em 0.5em;
+				width: 50%;
+
+				&--img {
+					width: 100%;
+					height: 33em;
+				}
+			}
+		}
+	}
+}
+
+@media (min-width: 928px) {
+	.card-home {
+		padding-left: 16em;
+		padding-right: 16em;
+
+		&__title {
+			font-size: 7.5rem;
+		}
+	}
+
+	.portfolio {
+		&__box {
+			padding: 18em 1em 2em;
+
+			&__img {
+				padding: 1em 1em;
+				width: 50%;
+
+				&--img {
+					width: 100%;
+					height: 34em;
+				}
+			}
+		}
+	}
+}
+
+@media (min-width: 992px) {
+	.card-nav {
+		&__logo {
+			left: -5em;
+		}
+
+		&__large {
+			position: absolute;
+			bottom: 0;
+			display: flex;
+			flex-direction: row;
+			justify-content: end;
+			width: 100%;
+
+			&--item {
+				padding: 0.5em;
+				margin-right: 0.5em;
+				font-size: 2.5rem;
+				text-decoration: none;
+				color: colors.$textColor;
+				transition: color 1s, background-color 0.5s, border-radius 0.5s;
+				animation: showLarge 1.5s ease-in-out;
+
+				&:hover {
+					color: colors.$mainColor;
+					background-color: colors.$secondColor;
+					border-radius: 10px;
+				}
+			}
+		}
+
+		&__burger-btn {
+			display: none;
+		}
+		&__nav {
+			display: none;
+		}
+	}
+	.card-home {
+		&__img {
+			background-image: url('../img/Roksana-średnimix.jpg');
+			background-position: center;
+		}
+	}
+
+	.card-aboutme {
+		&__title {
+			left: 2.5em;
+			font-size: 3.4rem;
+		}
+		&__undertitle {
+			padding: 10em 2em 0;
+			font-size: 2.9rem;
+		}
+
+		&__paragraphs {
+			padding: 4em 2.6em 2em;
+			font-size: 2.1rem;
+		}
+	}
+	.card-services {
+		&__title {
+			left: 2.5em;
+			font-size: 3.4rem;
+		}
+
+		&__buttons {
+			padding: 17em 7em 2em;
+
+			&__box {
+				padding-top: 1.5em;
+
+				&__button {
+					&--title {
+						padding: 1.3em;
+						font-size: 2.6rem;
+					}
+				}
+				&__photo {
+					padding: 0.6em 3em;
+					border-radius: 120px;
+				}
+			}
+		}
+	}
+	.card-price {
+		&__title {
+			left: 2.5em;
+			font-size: 3.4rem;
+		}
+		&__box {
+			padding: 17em 3.5em 2em;
+
+			&--paragraph {
+				font-size: 2.5rem;
+				padding-top: 0.8em;
+			}
+		}
+
+		&__attention {
+			padding: 1em 4em 2em;
+			&--attention {
+				font-size: 1.8rem;
+			}
+			&--span {
+				font-size: 2.1rem;
+			}
+		}
+	}
+
+	.card-contact {
+		&__title {
+			left: 2.5em;
+			font-size: 3.4rem;
+		}
+
+		&__box {
+			padding: 16em 5em 2em;
+
+			&__one {
+				font-size: 2.8rem;
+				&--one {
+					padding-left: 0.5em;
+				}
+				&--two {
+					padding-right: 0.5em;
+				}
+			}
+
+			&__two {
+				margin-top: 1.6em;
+				padding: 1em;
+
+				font-size: 2.8rem;
+				padding-top: 1em;
+
+				&--one {
+					padding-left: 0.5em;
+				}
+				&--two {
+					padding-right: 0.5em;
+				}
+			}
+
+			&__three {
+				margin-top: 5em;
+				padding-bottom: 4em;
+
+				&--findMe {
+					padding-bottom: 2em;
+					font-size: 2.8rem;
+				}
+				&--facebookIcon {
+					padding-right: 0.4em;
+					font-size: 6rem;
+				}
+				&--instaIcon {
+					font-size: 6rem;
+				}
+			}
+		}
+	}
+	.promotion {
+		&__title {
+			left: 2.5em;
+			font-size: 3.4rem;
+		}
+	}
+	.portfolio {
+		&__title {
+			left: 2.5em;
+			font-size: 3.4rem;
+		}
+		&__box {
+			padding: 19em 0.3em 2em;
+
+			&__img {
+				padding: 1em 0.5em;
+				width: 33%;
+
+				&--img {
+					width: 100%;
+					height: 29em;
+				}
+			}
+		}
+	}
+}
+
+@media (min-width: 1200px) {
+	.card-nav {
+		&__logo {
+			left: -3em;
+		}
+
+		&__large {
+			padding-right: 2em;
+
+			&--item {
+				padding: 0.5em;
+				margin-right: 0.8em;
+				font-size: 2.7rem;
+			}
+		}
+	}
+	.card-home {
+		&__img {
+			background-image: url('../img/Roksana-dużymix.jpg');
+		}
+	}
+
+	.card-aboutme {
+		&__title {
+			left: 2.7em;
+			font-size: 3.6rem;
+		}
+		&__undertitle {
+			padding: 11em 2em 0;
+			font-size: 3rem;
+		}
+		&__paragraphs {
+			padding: 4em 2.8em 2em;
+			font-size: 2.2rem;
+		}
+	}
+	.card-services {
+		&__title {
+			left: 2.7em;
+			font-size: 3.6rem;
+		}
+		&__buttons {
+			padding: 18em 11em 2em;
+
+			&__box {
+				padding-top: 1.6em;
+
+				&__button {
+					&--title {
+						padding: 1.4em;
+						font-size: 2.7rem;
+					}
+				}
+				&__photo {
+					padding: 0.7em 3.5em;
+					border-radius: 150px;
+				}
+			}
+		}
+	}
+	.card-price {
+		&__title {
+			left: 2.7em;
+			font-size: 3.6rem;
+		}
+		&__box {
+			padding: 18em 4em 2em;
+
+			&--paragraph {
+				font-size: 2.6rem;
+				padding-top: 0.9em;
+			}
+		}
+
+		&__attention {
+			padding: 1em 4.5em 2em;
+			&--attention {
+				font-size: 1.9rem;
+			}
+			&--span {
+				font-size: 2.2rem;
+			}
+		}
+	}
+	.card-contact {
+		&__title {
+			left: 2.7em;
+			font-size: 3.6rem;
+		}
+
+		&__box {
+			padding: 17em 8em 2em;
+
+			&__one {
+				font-size: 3rem;
+				&--one {
+					padding-left: 2.5em;
+				}
+				&--two {
+					padding-right: 2.5em;
+				}
+			}
+
+			&__two {
+				margin-top: 1.7em;
+				padding: 1em;
+				font-size: 3rem;
+				padding-top: 1em;
+
+				&--one {
+					padding-left: 2.5em;
+				}
+				&--two {
+					padding-right: 2.5em;
+				}
+			}
+
+			&__three {
+				margin-top: 6em;
+				padding-bottom: 5em;
+
+				&--findMe {
+					padding-bottom: 2em;
+					font-size: 3rem;
+				}
+				&--facebookIcon {
+					padding-right: 0.4em;
+					font-size: 8rem;
+				}
+				&--instaIcon {
+					font-size: 8rem;
+				}
+			}
+		}
+	}
+	.promotion {
+		&__title {
+			left: 2.7em;
+			font-size: 3.6rem;
+		}
+	}
+
+	.portfolio {
+		&__title {
+			left: 2.7em;
+			font-size: 3.6rem;
+		}
+		&__box {
+			padding: 19em 0.3em 2em;
+
+			&__img {
+				padding: 1em 0.5em;
+				width: 33%;
+
+				&--img {
+					width: 100%;
+					height: 33em;
+				}
+			}
+		}
+	}
+}
+
+@media (min-width: 1400px) {
+	.card-services {
+		&__buttons {
+			padding: 20em 14em 2em;
+
+			&__box {
+				padding-top: 1.7em;
+
+				&__button {
+					&--title {
+						padding: 1.5em;
+						font-size: 2.8rem;
+					}
+				}
+				&__photo {
+					padding: 0.8em 5em;
+					border-radius: 250px;
+				}
+			}
+		}
+	}
+	.portfolio {
+		&__box {
+			padding: 19em 0.3em 2em;
+
+			&__img {
+				padding: 1em 0.5em;
+				width: 25%;
+
+				&--img {
+					width: 100%;
+					height: 33em;
+				}
+			}
+		}
+	}
+}
+
+@media (min-width: 1600px) {
+	.portfolio {
+		&__box {
+			padding: 19em 1em 2em;
+
+			&__img {
+				padding: 1em 0.5em;
+				width: 25%;
+
+				&--img {
+					width: 100%;
+					height: 34em;
+				}
+			}
+		}
+	}
+}
+@media (min-width: 1800px) {
+	.portfolio {
+		&__box {
+			padding: 19em 3em 2em;
+
+			&__img {
+				padding: 1em 0.5em;
+				width: 25%;
+
+				&--img {
+					width: 100%;
+					height: 35em;
+				}
+			}
+		}
+	}
+}
+
+.activeNav {
+	transform: translateX(0%);
+}
+.showItems {
+	animation: itemsShow 0.3s 0.3s ease-in-out forwards;
+}
+.activeIcon {
+	display: flex;
+}
+.hideIcon {
+	display: none;
+}
+
+.active {
+	display: flex;
+}
+.hide {
+	display: none;
+}
+
+.changeBGC {
+	// background-color: colors.$firstColor;
+	background: linear-gradient(to right, #583e58 10%, white);
+	transform: scale(1.1);
+}
+
+.changeColor {
+	color: colors.$mainColor;
+	text-shadow: 2px 2px colors.$textColor;
+
+	// color: colors.$textColor;
+	transform: scale(1.3);
+}
